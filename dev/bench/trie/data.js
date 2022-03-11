@@ -1,95 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1646972701116,
+  "lastUpdate": 1646992753611,
   "repoUrl": "https://github.com/ethereumjs/ethereumjs-monorepo",
   "entries": {
     "Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "cesarbrazon10@gmail.com",
-            "name": "Cesar Brazon",
-            "username": "cbrzn"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "4d087b47e9f0342355cbdceb6863703cbb79a6be",
-          "message": "Monorepo (& Tx, VM): Examples scripts in CI (#1658)\n\n* chore(examples): examples added to ci\r\n\r\n* chore(examples-ci): remove script from VM (for now) & rename examples workflow file\r\n\r\n* chore(ci): new script formwatted with prettier & example workflow changes to run with non-test branches\r\n\r\nCo-authored-by: Holger Drewes <Holger.Drewes@gmail.com>",
-          "timestamp": "2022-01-25T11:31:20+01:00",
-          "tree_id": "b17cec483cd24478d63c45145943fbf2849f2080",
-          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/4d087b47e9f0342355cbdceb6863703cbb79a6be"
-        },
-        "date": 1643106946740,
-        "tool": "benchmarkjs",
-        "benches": [
-          {
-            "name": "1k-3-32-ran",
-            "value": 14079,
-            "range": "±16.27%",
-            "unit": "ops/sec",
-            "extra": "61 samples"
-          },
-          {
-            "name": "1k-5-32-ran",
-            "value": 12838,
-            "range": "±22.29%",
-            "unit": "ops/sec",
-            "extra": "70 samples"
-          },
-          {
-            "name": "1k-9-32-ran",
-            "value": 17048,
-            "range": "±1.52%",
-            "unit": "ops/sec",
-            "extra": "77 samples"
-          },
-          {
-            "name": "1k-1k-32-ran",
-            "value": 11746,
-            "range": "±17.44%",
-            "unit": "ops/sec",
-            "extra": "53 samples"
-          },
-          {
-            "name": "1k-1k-32-mir",
-            "value": 5025,
-            "range": "±14.02%",
-            "unit": "ops/sec",
-            "extra": "51 samples"
-          },
-          {
-            "name": "Checkpointing: 100 iterations",
-            "value": 936,
-            "range": "±6.08%",
-            "unit": "ops/sec",
-            "extra": "72 samples"
-          },
-          {
-            "name": "Checkpointing: 500 iterations",
-            "value": 186,
-            "range": "±10.67%",
-            "unit": "ops/sec",
-            "extra": "65 samples"
-          },
-          {
-            "name": "Checkpointing: 1000 iterations",
-            "value": 10.61,
-            "range": "±207.00%",
-            "unit": "ops/sec",
-            "extra": "8 samples"
-          },
-          {
-            "name": "Checkpointing: 5000 iterations",
-            "value": 16.19,
-            "range": "±25.64%",
-            "unit": "ops/sec",
-            "extra": "33 samples"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2608,6 +2521,93 @@ window.BENCHMARK_DATA = {
             "name": "Checkpointing: 5000 iterations",
             "value": 15.07,
             "range": "±42.43%",
+            "unit": "ops/sec",
+            "extra": "36 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "ryan@ryanio.com",
+            "name": "Ryan Ghods",
+            "username": "ryanio"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2771a8becde2c6926a8e080194932491be01895b",
+          "message": "client: kiln touchups (#1778)\n\n* util/rpc.spec.ts: add more coverage cases\r\n\r\n* re-add accidentially removed test\r\n\r\n* slim withEngineMiddleware fn",
+          "timestamp": "2022-03-11T10:53:42+01:00",
+          "tree_id": "f8a7c6d29b73b756ece84b23c66dcd57449888f6",
+          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/2771a8becde2c6926a8e080194932491be01895b"
+        },
+        "date": 1646992753004,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "1k-3-32-ran",
+            "value": 15553,
+            "range": "±15.21%",
+            "unit": "ops/sec",
+            "extra": "63 samples"
+          },
+          {
+            "name": "1k-5-32-ran",
+            "value": 17017,
+            "range": "±4.27%",
+            "unit": "ops/sec",
+            "extra": "78 samples"
+          },
+          {
+            "name": "1k-9-32-ran",
+            "value": 16884,
+            "range": "±2.28%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
+          },
+          {
+            "name": "1k-1k-32-ran",
+            "value": 9519,
+            "range": "±30.82%",
+            "unit": "ops/sec",
+            "extra": "44 samples"
+          },
+          {
+            "name": "1k-1k-32-mir",
+            "value": 18608,
+            "range": "±3.22%",
+            "unit": "ops/sec",
+            "extra": "66 samples"
+          },
+          {
+            "name": "Checkpointing: 100 iterations",
+            "value": 861,
+            "range": "±9.88%",
+            "unit": "ops/sec",
+            "extra": "60 samples"
+          },
+          {
+            "name": "Checkpointing: 500 iterations",
+            "value": 182,
+            "range": "±12.37%",
+            "unit": "ops/sec",
+            "extra": "58 samples"
+          },
+          {
+            "name": "Checkpointing: 1000 iterations",
+            "value": 54.58,
+            "range": "±82.40%",
+            "unit": "ops/sec",
+            "extra": "60 samples"
+          },
+          {
+            "name": "Checkpointing: 5000 iterations",
+            "value": 16.37,
+            "range": "±24.52%",
             "unit": "ops/sec",
             "extra": "36 samples"
           }
