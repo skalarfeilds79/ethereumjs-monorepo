@@ -1,95 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1646995456963,
+  "lastUpdate": 1646997106302,
   "repoUrl": "https://github.com/ethereumjs/ethereumjs-monorepo",
   "entries": {
     "Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "Holger.Drewes@gmail.com",
-            "name": "Holger Drewes",
-            "username": "holgerd77"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "06bdad5bc09ba0e364cb1b8b3ff902602d7a91b8",
-          "message": "New Minor Releases (VM Dynamic GasCosts, EIP-2681, Sepolia, various other) (#1640)\n\n* trie: bumped version to v4.2.3, added CHANGELOG entry, updated upstream dependency versions\r\n\r\n* Util: bumped version to v7.1.4, added CHANGELOG entry, updated upstream dependency versions\r\n\r\n* Util: rebuild documentation\r\n\r\n* Common: bumped version to v2.6.1, added CHANGELOG entry, updated upstream dependency versions\r\n\r\n* Common: rebuild documentation\r\n\r\n* Monorepo: updated package-lock.json\r\n\r\n* tx: bumped version to v3.5.0, added CHANGELOG entry, updated upstream dependency versions\r\n\r\n* tx: rebuild documentation\r\n\r\n* devp2p: bumped version to v4.2.1, added CHANGELOG entry, updated upstream dependency versions\r\n\r\n* Common: small README updates\r\n\r\n* VM: bumped version to v5.7.0, added CHANGELOG entry, updated upstream dependency versions\r\n\r\n* Monorepo: updated package-lock.json\r\n\r\n* Client: bumped version to v0.3.0, added CHANGELOG entry, updated minimal Node engine version in package.json\r\n\r\n* Monorepo: updated package-lock.json\r\n\r\n* Minor Releases: Apply suggestions from code review\r\n\r\nCo-authored-by: Ryan Ghods <ryan@ryanio.com>\r\n\r\n* monorepo: updated package-lock.json\r\n\r\n* Minor Releases: updated CHANGELOG files, updated release date\r\n\r\n* Util: rebuild documentation\r\n\r\nCo-authored-by: Ryan Ghods <ryan@ryanio.com>",
-          "timestamp": "2022-02-01T09:56:06+01:00",
-          "tree_id": "524dba3ab974c3ca57211fcfcea950c0be92830b",
-          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/06bdad5bc09ba0e364cb1b8b3ff902602d7a91b8"
-        },
-        "date": 1643706077779,
-        "tool": "benchmarkjs",
-        "benches": [
-          {
-            "name": "1k-3-32-ran",
-            "value": 11899,
-            "range": "±9.33%",
-            "unit": "ops/sec",
-            "extra": "68 samples"
-          },
-          {
-            "name": "1k-5-32-ran",
-            "value": 8654,
-            "range": "±17.49%",
-            "unit": "ops/sec",
-            "extra": "53 samples"
-          },
-          {
-            "name": "1k-9-32-ran",
-            "value": 13352,
-            "range": "±3.31%",
-            "unit": "ops/sec",
-            "extra": "76 samples"
-          },
-          {
-            "name": "1k-1k-32-ran",
-            "value": 12128,
-            "range": "±3.57%",
-            "unit": "ops/sec",
-            "extra": "78 samples"
-          },
-          {
-            "name": "1k-1k-32-mir",
-            "value": 11956,
-            "range": "±13.48%",
-            "unit": "ops/sec",
-            "extra": "61 samples"
-          },
-          {
-            "name": "Checkpointing: 100 iterations",
-            "value": 435,
-            "range": "±8.90%",
-            "unit": "ops/sec",
-            "extra": "63 samples"
-          },
-          {
-            "name": "Checkpointing: 500 iterations",
-            "value": 103,
-            "range": "±9.06%",
-            "unit": "ops/sec",
-            "extra": "57 samples"
-          },
-          {
-            "name": "Checkpointing: 1000 iterations",
-            "value": 67.57,
-            "range": "±22.11%",
-            "unit": "ops/sec",
-            "extra": "47 samples"
-          },
-          {
-            "name": "Checkpointing: 5000 iterations",
-            "value": 17.37,
-            "range": "±4.52%",
-            "unit": "ops/sec",
-            "extra": "32 samples"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2610,6 +2523,93 @@ window.BENCHMARK_DATA = {
             "range": "±95.56%",
             "unit": "ops/sec",
             "extra": "32 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "ryan@ryanio.com",
+            "name": "Ryan Ghods",
+            "username": "ryanio"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b5d9fb0765af7e6a176762acb548eed5033eda5f",
+          "message": "common: update status fields for EIPs and hardforks (#1777)\n\n* common: update status fields for EIPs and hardforks\r\n\r\n* Common: EXPERIMENTAL -> Draft status (EIP-2315)\r\n\r\nCo-authored-by: Holger Drewes <Holger.Drewes@gmail.com>",
+          "timestamp": "2022-03-11T12:06:47+01:00",
+          "tree_id": "73a0224cf326da3e3c447da9f2553812b0855c3f",
+          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/b5d9fb0765af7e6a176762acb548eed5033eda5f"
+        },
+        "date": 1646997105736,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "1k-3-32-ran",
+            "value": 16159,
+            "range": "±15.14%",
+            "unit": "ops/sec",
+            "extra": "73 samples"
+          },
+          {
+            "name": "1k-5-32-ran",
+            "value": 17811,
+            "range": "±1.13%",
+            "unit": "ops/sec",
+            "extra": "82 samples"
+          },
+          {
+            "name": "1k-9-32-ran",
+            "value": 14858,
+            "range": "±13.08%",
+            "unit": "ops/sec",
+            "extra": "66 samples"
+          },
+          {
+            "name": "1k-1k-32-ran",
+            "value": 7909,
+            "range": "±38.18%",
+            "unit": "ops/sec",
+            "extra": "62 samples"
+          },
+          {
+            "name": "1k-1k-32-mir",
+            "value": 18733,
+            "range": "±1.83%",
+            "unit": "ops/sec",
+            "extra": "77 samples"
+          },
+          {
+            "name": "Checkpointing: 100 iterations",
+            "value": 890,
+            "range": "±6.97%",
+            "unit": "ops/sec",
+            "extra": "69 samples"
+          },
+          {
+            "name": "Checkpointing: 500 iterations",
+            "value": 177,
+            "range": "±12.08%",
+            "unit": "ops/sec",
+            "extra": "65 samples"
+          },
+          {
+            "name": "Checkpointing: 1000 iterations",
+            "value": 52.29,
+            "range": "±84.76%",
+            "unit": "ops/sec",
+            "extra": "61 samples"
+          },
+          {
+            "name": "Checkpointing: 5000 iterations",
+            "value": 16.6,
+            "range": "±22.65%",
+            "unit": "ops/sec",
+            "extra": "36 samples"
           }
         ]
       }
