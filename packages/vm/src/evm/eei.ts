@@ -469,7 +469,7 @@ export default class EEI {
   /**
    * Sends a message with arbitrary data to a given address path.
    */
-  async authcall(gasLimit: BN, address: Address, value: BN, data: Buffer): Promise<BN> {
+  async authcall(gasLimit: bigint, address: Address, value: bigint, data: Buffer): Promise<bigint> {
     const msg = new Message({
       caller: this._env.auth,
       gasLimit,

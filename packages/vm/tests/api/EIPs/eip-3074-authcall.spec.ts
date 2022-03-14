@@ -1,11 +1,13 @@
 import tape from 'tape'
 import {
   Address,
-  BN,
+  bigIntToBuffer,
+  bufferToBigInt,
   ecsign,
   keccak256,
   privateToAddress,
   setLengthLeft,
+  toBuffer,
   zeros,
 } from 'ethereumjs-util'
 import Common, { Chain, Hardfork } from '@ethereumjs/common'
@@ -29,7 +31,7 @@ const privateKey = Buffer.from(
 const block = Block.fromBlockData(
   {
     header: {
-      baseFeePerGas: new BN(7),
+      baseFeePerGas: BigInt(7),
     },
   },
   { common }
@@ -45,7 +47,7 @@ const contractStorageAddress = new Address(Buffer.from('ee'.repeat(20), 'hex'))
 function signMessage(commitUnpadded: Buffer, address: Address, privateKey: Buffer) {
   const commit = setLengthLeft(commitUnpadded, 32)
   const paddedInvokerAddress = setLengthLeft(address.buf, 32)
-  const chainId = setLengthLeft(common.chainIdBN().toBuffer(), 32)
+  const chainId = setLengthLeft(bigIntToBuffer(common.chainId()), 32)
   const message = Buffer.concat([Buffer.from('03', 'hex'), chainId, paddedInvokerAddress, commit])
   const msgHash = keccak256(message)
   return ecsign(msgHash, privateKey, 0)
@@ -55,11 +57,11 @@ function getAuthCode(commitUnpadded: Buffer, signature: any) {
   const commit = setLengthLeft(commitUnpadded, 32)
   let v
   if (signature.v == 27) {
-    v = setLengthLeft(new BN(0).toBuffer(), 32)
+    v = setLengthLeft(Buffer.from('00', 'hex'), 32)
   } else if (signature.v == 28) {
-    v = setLengthLeft(new BN(1).toBuffer(), 32)
+    v = setLengthLeft(Buffer.from('01', 'hex'), 32)
   } else {
-    setLengthLeft(new BN(signature.v).toBuffer(), 32)
+    setLengthLeft(toBuffer(signature.v), 32)
   }
 
   const PUSH32 = Buffer.from('7F', 'hex')
@@ -68,26 +70,38 @@ function getAuthCode(commitUnpadded: Buffer, signature: any) {
 }
 
 type AuthcallData = {
-  gasLimit?: BN
+  gasLimit?: bigint
   address: Address
-  value?: BN
-  valueExt?: BN
-  argsOffset?: BN
-  argsLength?: BN
-  retOffset?: BN
-  retLength?: BN
+  value?: bigint
+  valueExt?: bigint
+  argsOffset?: bigint
+  argsLength?: bigint
+  retOffset?: bigint
+  retLength?: bigint
 }
 
 function getAuthCallCode(data: AuthcallData) {
   const ZEROS32 = zeros(32)
-  const gasLimitBuffer = setLengthLeft(data.gasLimit ? data.gasLimit.toBuffer() : ZEROS32, 32)
+  const gasLimitBuffer = setLengthLeft(data.gasLimit ? bigIntToBuffer(data.gasLimit) : ZEROS32, 32)
   const addressBuffer = setLengthLeft(data.address.buf, 32)
-  const valueBuffer = setLengthLeft(data.value ? data.value.toBuffer() : ZEROS32, 32)
-  const valueExtBuffer = setLengthLeft(data.valueExt ? data.valueExt.toBuffer() : ZEROS32, 32)
-  const argsOffsetBuffer = setLengthLeft(data.argsOffset ? data.argsOffset.toBuffer() : ZEROS32, 32)
-  const argsLengthBuffer = setLengthLeft(data.argsLength ? data.argsLength.toBuffer() : ZEROS32, 32)
-  const retOffsetBuffer = setLengthLeft(data.retOffset ? data.retOffset.toBuffer() : ZEROS32, 32)
-  const retLengthBuffer = setLengthLeft(data.retLength ? data.retLength.toBuffer() : ZEROS32, 32)
+  const valueBuffer = setLengthLeft(data.value ? bigIntToBuffer(data.value) : ZEROS32, 32)
+  const valueExtBuffer = setLengthLeft(data.valueExt ? bigIntToBuffer(data.valueExt) : ZEROS32, 32)
+  const argsOffsetBuffer = setLengthLeft(
+    data.argsOffset ? bigIntToBuffer(data.argsOffset) : ZEROS32,
+    32
+  )
+  const argsLengthBuffer = setLengthLeft(
+    data.argsLength ? bigIntToBuffer(data.argsLength) : ZEROS32,
+    32
+  )
+  const retOffsetBuffer = setLengthLeft(
+    data.retOffset ? bigIntToBuffer(data.retOffset) : ZEROS32,
+    32
+  )
+  const retLengthBuffer = setLengthLeft(
+    data.retLength ? bigIntToBuffer(data.retLength) : ZEROS32,
+    32
+  )
   const PUSH32 = Buffer.from('7f', 'hex')
   const AUTHCALL = Buffer.from('f7', 'hex')
   const order = [
@@ -117,16 +131,15 @@ const STORECALLER = Buffer.from('3360005500', 'hex')
 // This flips the signature: the result is a signature which has the same public key upon key recovery,
 // But the s-value is now > N_DIV_2
 function flipSignature(signature: any) {
-  const s = new BN(signature.s)
-  const flipped = new BN(
-    Buffer.from('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141', 'hex')
-  ).isub(s)
+  const s = bufferToBigInt(signature.s)
+  const flipped = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141n - s
+
   if (signature.v == 27) {
     signature.v = 28
   } else {
     signature.v = 27
   }
-  signature.s = setLengthLeft(flipped.toBuffer(), 32)
+  signature.s = setLengthLeft(bigIntToBuffer(flipped), 32)
   return signature
 }
 
@@ -145,7 +158,7 @@ tape('EIP-3074 AUTHCALL', (t) => {
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = new BN(1000000)
+    account.balance = BigInt(1000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
@@ -167,7 +180,7 @@ tape('EIP-3074 AUTHCALL', (t) => {
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = new BN(1000000)
+    account.balance = BigInt(1000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
@@ -189,7 +202,7 @@ tape('EIP-3074 AUTHCALL', (t) => {
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = new BN(1000000)
+    account.balance = BigInt(1000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
@@ -215,7 +228,7 @@ tape('EIP-3074 AUTHCALL', (t) => {
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = new BN(1000000)
+    account.balance = BigInt(1000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
@@ -264,7 +277,7 @@ tape('EIP-3074 AUTHCALL', (t) => {
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = new BN(1000000)
+    account.balance = BigInt(1000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
