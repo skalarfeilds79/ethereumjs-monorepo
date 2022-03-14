@@ -464,7 +464,7 @@ export const dynamicGasHandlers: Map<number, AsyncDynamicGasHandler> = new Map<
       }
 
       let gasLimit = maxCallGas(
-        currentGasLimit.clone(),
+        runState.eei.getGasLeft().isub(gas),
         runState.eei.getGasLeft().isub(gas),
         runState,
         common
