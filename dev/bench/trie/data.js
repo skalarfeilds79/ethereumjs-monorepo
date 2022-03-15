@@ -1,95 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647325985675,
+  "lastUpdate": 1647341208438,
   "repoUrl": "https://github.com/ethereumjs/ethereumjs-monorepo",
   "entries": {
     "Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "Holger.Drewes@gmail.com",
-            "name": "Holger Drewes",
-            "username": "holgerd77"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "e83ded1e0385c4a4728a8674105eacf91bfeb8bb",
-          "message": "Block -> Release: Bumped version to v3.6.1, added CHANGELOG entry, updated upstream dependency versions (#1683)",
-          "timestamp": "2022-02-02T20:46:07+01:00",
-          "tree_id": "72d6e8f00bb488f68aa8aa65763d669853d8b374",
-          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/e83ded1e0385c4a4728a8674105eacf91bfeb8bb"
-        },
-        "date": 1643831471030,
-        "tool": "benchmarkjs",
-        "benches": [
-          {
-            "name": "1k-3-32-ran",
-            "value": 13436,
-            "range": "±12.77%",
-            "unit": "ops/sec",
-            "extra": "64 samples"
-          },
-          {
-            "name": "1k-5-32-ran",
-            "value": 8773,
-            "range": "±18.62%",
-            "unit": "ops/sec",
-            "extra": "64 samples"
-          },
-          {
-            "name": "1k-9-32-ran",
-            "value": 15102,
-            "range": "±1.42%",
-            "unit": "ops/sec",
-            "extra": "70 samples"
-          },
-          {
-            "name": "1k-1k-32-ran",
-            "value": 14291,
-            "range": "±2.70%",
-            "unit": "ops/sec",
-            "extra": "72 samples"
-          },
-          {
-            "name": "1k-1k-32-mir",
-            "value": 5296,
-            "range": "±15.61%",
-            "unit": "ops/sec",
-            "extra": "26 samples"
-          },
-          {
-            "name": "Checkpointing: 100 iterations",
-            "value": 466,
-            "range": "±15.67%",
-            "unit": "ops/sec",
-            "extra": "59 samples"
-          },
-          {
-            "name": "Checkpointing: 500 iterations",
-            "value": 172,
-            "range": "±6.83%",
-            "unit": "ops/sec",
-            "extra": "67 samples"
-          },
-          {
-            "name": "Checkpointing: 1000 iterations",
-            "value": 87.99,
-            "range": "±11.71%",
-            "unit": "ops/sec",
-            "extra": "60 samples"
-          },
-          {
-            "name": "Checkpointing: 5000 iterations",
-            "value": 6.28,
-            "range": "±108.20%",
-            "unit": "ops/sec",
-            "extra": "30 samples"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2610,6 +2523,93 @@ window.BENCHMARK_DATA = {
             "range": "±27.28%",
             "unit": "ops/sec",
             "extra": "31 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cesarbrazon10@gmail.com",
+            "name": "Cesar Brazon",
+            "username": "cbrzn"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3b8734170ab424355531cc97dc9d719f063df346",
+          "message": "client/cli: start script now accepts files with private keys (#1790)\n\nCo-authored-by: Holger Drewes <Holger.Drewes@gmail.com>",
+          "timestamp": "2022-03-15T11:41:00+01:00",
+          "tree_id": "c7c8553514f044666e63e0631b65fd0173ce50af",
+          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/3b8734170ab424355531cc97dc9d719f063df346"
+        },
+        "date": 1647341207236,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "1k-3-32-ran",
+            "value": 12097,
+            "range": "±8.15%",
+            "unit": "ops/sec",
+            "extra": "68 samples"
+          },
+          {
+            "name": "1k-5-32-ran",
+            "value": 10682,
+            "range": "±19.55%",
+            "unit": "ops/sec",
+            "extra": "65 samples"
+          },
+          {
+            "name": "1k-9-32-ran",
+            "value": 12958,
+            "range": "±3.35%",
+            "unit": "ops/sec",
+            "extra": "77 samples"
+          },
+          {
+            "name": "1k-1k-32-ran",
+            "value": 12061,
+            "range": "±3.86%",
+            "unit": "ops/sec",
+            "extra": "77 samples"
+          },
+          {
+            "name": "1k-1k-32-mir",
+            "value": 6481,
+            "range": "±37.90%",
+            "unit": "ops/sec",
+            "extra": "38 samples"
+          },
+          {
+            "name": "Checkpointing: 100 iterations",
+            "value": 775,
+            "range": "±6.53%",
+            "unit": "ops/sec",
+            "extra": "70 samples"
+          },
+          {
+            "name": "Checkpointing: 500 iterations",
+            "value": 161,
+            "range": "±11.95%",
+            "unit": "ops/sec",
+            "extra": "62 samples"
+          },
+          {
+            "name": "Checkpointing: 1000 iterations",
+            "value": 59.39,
+            "range": "±51.81%",
+            "unit": "ops/sec",
+            "extra": "32 samples"
+          },
+          {
+            "name": "Checkpointing: 5000 iterations",
+            "value": 16.15,
+            "range": "±8.28%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
           }
         ]
       }
