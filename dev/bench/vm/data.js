@@ -1,67 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647341184411,
+  "lastUpdate": 1647342701898,
   "repoUrl": "https://github.com/ethereumjs/ethereumjs-monorepo",
   "entries": {
     "Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "17355484+acolytec3@users.noreply.github.com",
-            "name": "acolytec3",
-            "username": "acolytec3"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "52aefb83451fec6731b8b826b23f7498f2877c6e",
-          "message": "vm: fix keyMap iterator in blockchain test runner (#1684)\n\n* vm: fix keyMap iterator in blockchain test runner\r\n\r\n* Update packages/vm/tests/util.ts\r\n\r\n* Update packages/vm/tests/util.ts\r\n\r\n* Update packages/vm/tests/util.ts\r\n\r\nCo-authored-by: Ryan Ghods <ryan@ryanio.com>",
-          "timestamp": "2022-02-03T11:59:07+01:00",
-          "tree_id": "f5d71e502c618bb21722cf73e9a3f08432ff0606",
-          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/52aefb83451fec6731b8b826b23f7498f2877c6e"
-        },
-        "date": 1643886264338,
-        "tool": "benchmarkjs",
-        "benches": [
-          {
-            "name": "Block 9422905",
-            "value": 19471,
-            "range": "±5.59%",
-            "unit": "ops/sec",
-            "extra": "68 samples"
-          },
-          {
-            "name": "Block 9422906",
-            "value": 15430,
-            "range": "±14.13%",
-            "unit": "ops/sec",
-            "extra": "72 samples"
-          },
-          {
-            "name": "Block 9422907",
-            "value": 19625,
-            "range": "±2.54%",
-            "unit": "ops/sec",
-            "extra": "71 samples"
-          },
-          {
-            "name": "Block 9422908",
-            "value": 12773,
-            "range": "±13.19%",
-            "unit": "ops/sec",
-            "extra": "47 samples"
-          },
-          {
-            "name": "Block 9422910",
-            "value": 12816,
-            "range": "±25.51%",
-            "unit": "ops/sec",
-            "extra": "65 samples"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -1770,6 +1711,65 @@ window.BENCHMARK_DATA = {
             "range": "±2.63%",
             "unit": "ops/sec",
             "extra": "75 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "76567250+g11tech@users.noreply.github.com",
+            "name": "g11tech",
+            "username": "g11tech"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b1bf67c41c627057ebe23f244780b199886b12ec",
+          "message": "client: Sync stall investigation improvements (#1781)\n\n* Sync stall investigation improvements\r\n\r\n* remove comma from logs\r\n\r\n* fixing the fetcher error handling\r\n\r\n* TODO for handling the writer error better\r\n\r\n* fetcher cleanup on error\r\n\r\n* fix test for fullsync spec\r\n\r\n* resolve the fetcher on successful run\r\n\r\n* referesh status of peer on fetcher error\r\n\r\n* stubs for server\r\n\r\n* updating the sig of connect to match with mockserver\r\n\r\n* fetcher error debug log\r\n\r\n* Handle  reorg possibility\r\n\r\n* fix fullsync test case\r\n\r\n* nits, cleanup, add peer reconnection after ban if peerpool is empty\r\n\r\n* fixing the writer as async writev was messing with order\r\n\r\nCo-authored-by: Ryan Ghods <ryan@ryanio.com>\r\nCo-authored-by: Holger Drewes <Holger.Drewes@gmail.com>",
+          "timestamp": "2022-03-15T12:05:32+01:00",
+          "tree_id": "7f95f8b3ca1ee36b8221d90565b117a88048ddbf",
+          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/b1bf67c41c627057ebe23f244780b199886b12ec"
+        },
+        "date": 1647342701359,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Block 9422905",
+            "value": 17746,
+            "range": "±8.50%",
+            "unit": "ops/sec",
+            "extra": "70 samples"
+          },
+          {
+            "name": "Block 9422906",
+            "value": 18880,
+            "range": "±2.56%",
+            "unit": "ops/sec",
+            "extra": "75 samples"
+          },
+          {
+            "name": "Block 9422907",
+            "value": 14559,
+            "range": "±17.58%",
+            "unit": "ops/sec",
+            "extra": "59 samples"
+          },
+          {
+            "name": "Block 9422908",
+            "value": 17882,
+            "range": "±2.56%",
+            "unit": "ops/sec",
+            "extra": "72 samples"
+          },
+          {
+            "name": "Block 9422910",
+            "value": 18342,
+            "range": "±2.46%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
           }
         ]
       }
