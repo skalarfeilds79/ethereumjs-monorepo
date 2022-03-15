@@ -1,95 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647342714527,
+  "lastUpdate": 1647344891048,
   "repoUrl": "https://github.com/ethereumjs/ethereumjs-monorepo",
   "entries": {
     "Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "cesarbrazon10@gmail.com",
-            "name": "Cesar Brazon",
-            "username": "cbrzn"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "be06be6be600186392d5c4e76bbe8f0916e0f3fa",
-          "message": "VM: trying to simplify examples (#1670)\n\nCo-authored-by: Holger Drewes <Holger.Drewes@gmail.com>",
-          "timestamp": "2022-02-03T12:44:15+01:00",
-          "tree_id": "5b26d7d18ba002df5ad0beeada43162c2010ccea",
-          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/be06be6be600186392d5c4e76bbe8f0916e0f3fa"
-        },
-        "date": 1643888974508,
-        "tool": "benchmarkjs",
-        "benches": [
-          {
-            "name": "1k-3-32-ran",
-            "value": 13433,
-            "range": "±13.85%",
-            "unit": "ops/sec",
-            "extra": "63 samples"
-          },
-          {
-            "name": "1k-5-32-ran",
-            "value": 9266,
-            "range": "±18.06%",
-            "unit": "ops/sec",
-            "extra": "70 samples"
-          },
-          {
-            "name": "1k-9-32-ran",
-            "value": 14877,
-            "range": "±2.51%",
-            "unit": "ops/sec",
-            "extra": "76 samples"
-          },
-          {
-            "name": "1k-1k-32-ran",
-            "value": 13974,
-            "range": "±2.88%",
-            "unit": "ops/sec",
-            "extra": "71 samples"
-          },
-          {
-            "name": "1k-1k-32-mir",
-            "value": 4796,
-            "range": "±10.38%",
-            "unit": "ops/sec",
-            "extra": "24 samples"
-          },
-          {
-            "name": "Checkpointing: 100 iterations",
-            "value": 524,
-            "range": "±15.82%",
-            "unit": "ops/sec",
-            "extra": "61 samples"
-          },
-          {
-            "name": "Checkpointing: 500 iterations",
-            "value": 168,
-            "range": "±11.26%",
-            "unit": "ops/sec",
-            "extra": "66 samples"
-          },
-          {
-            "name": "Checkpointing: 1000 iterations",
-            "value": 41.36,
-            "range": "±107.28%",
-            "unit": "ops/sec",
-            "extra": "64 samples"
-          },
-          {
-            "name": "Checkpointing: 5000 iterations",
-            "value": 12.63,
-            "range": "±29.94%",
-            "unit": "ops/sec",
-            "extra": "30 samples"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2610,6 +2523,93 @@ window.BENCHMARK_DATA = {
             "range": "±27.71%",
             "unit": "ops/sec",
             "extra": "30 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "17355484+acolytec3@users.noreply.github.com",
+            "name": "acolytec3",
+            "username": "acolytec3"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "010322d80663e34844b92bbbdbbf12d150dd7be1",
+          "message": "VM, Common: implement eip-3540 (EOF1) (#1719)\n\n* Add EIP json\r\n\r\n* Partial changes to enable EIp3540 and start code checks\r\n\r\n* Finish code validation checks and API tests\r\n\r\n* Move eof params to common\r\n\r\n* Code execution context updates\r\n\r\n* Add exception for invalid EOF format\r\n\r\n* Various fixes\r\n\r\n* Gate push handler changes behind EIP\r\n\r\n* Remove ethereum/tests tests\r\n\r\n* Clarify eof helper variable names\r\n\r\n* more naming clarifications\r\n\r\n* rename bytecode to container\r\n\r\n* check that section sizes are greater than 0\r\n\r\n* VM, Common: Add EIP-3670 (EOF - Code Validation) (#1743)\r\n\r\n* EIP3670 EOF1 code validation changes\r\n\r\n* Fix typos, add tests, update error EOF handler\r\n\r\n* EIP3540 tests\r\n\r\n* Lint fixes\r\n\r\n* Fix tests\r\n\r\n* Lint/uncomment tests\r\n\r\n* More adjustments to EOF1 logic\r\n\r\n* compartmentalize tests\r\n\r\n* Add checks for newly deployed contract code\r\n\r\n* Fix state test runner for specified EIPs\r\n\r\n* vm: add eip3540 tests invalid eof initcode\r\n\r\n* vm: lint\r\n\r\n* vm/tests: cleanup 3540 tests\r\n\r\n* Address feedback\r\n\r\n* lint\r\n\r\nCo-authored-by: Jochem Brouwer <jochembrouwer96@gmail.com>\r\nCo-authored-by: Holger Drewes <Holger.Drewes@gmail.com>",
+          "timestamp": "2022-03-15T12:42:11+01:00",
+          "tree_id": "e18329763464ddefc5df254eea16fa2ee81f5e67",
+          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/010322d80663e34844b92bbbdbbf12d150dd7be1"
+        },
+        "date": 1647344890431,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "1k-3-32-ran",
+            "value": 11857,
+            "range": "±6.78%",
+            "unit": "ops/sec",
+            "extra": "67 samples"
+          },
+          {
+            "name": "1k-5-32-ran",
+            "value": 10921,
+            "range": "±15.62%",
+            "unit": "ops/sec",
+            "extra": "54 samples"
+          },
+          {
+            "name": "1k-9-32-ran",
+            "value": 11972,
+            "range": "±3.54%",
+            "unit": "ops/sec",
+            "extra": "75 samples"
+          },
+          {
+            "name": "1k-1k-32-ran",
+            "value": 11653,
+            "range": "±3.89%",
+            "unit": "ops/sec",
+            "extra": "75 samples"
+          },
+          {
+            "name": "1k-1k-32-mir",
+            "value": 6445,
+            "range": "±46.25%",
+            "unit": "ops/sec",
+            "extra": "30 samples"
+          },
+          {
+            "name": "Checkpointing: 100 iterations",
+            "value": 750,
+            "range": "±6.67%",
+            "unit": "ops/sec",
+            "extra": "67 samples"
+          },
+          {
+            "name": "Checkpointing: 500 iterations",
+            "value": 153,
+            "range": "±12.32%",
+            "unit": "ops/sec",
+            "extra": "61 samples"
+          },
+          {
+            "name": "Checkpointing: 1000 iterations",
+            "value": 39.31,
+            "range": "±99.46%",
+            "unit": "ops/sec",
+            "extra": "36 samples"
+          },
+          {
+            "name": "Checkpointing: 5000 iterations",
+            "value": 12.78,
+            "range": "±28.35%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
           }
         ]
       }
