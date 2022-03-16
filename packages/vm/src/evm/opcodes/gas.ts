@@ -470,7 +470,7 @@ export const dynamicGasHandlers: Map<number, AsyncDynamicGasHandler> = new Map<
         common
       )
       if (!(currentGasLimit === BigInt(0))) {
-        if (currentGasLimit < gasLimit) {
+        if (currentGasLimit > gasLimit) {
           trap(ERROR.OUT_OF_GAS)
         }
         gasLimit = currentGasLimit

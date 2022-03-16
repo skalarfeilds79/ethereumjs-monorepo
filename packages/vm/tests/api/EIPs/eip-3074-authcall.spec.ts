@@ -80,6 +80,26 @@ type AuthcallData = {
   retLength?: bigint
 }
 
+function MSTORE(position: Buffer, value: Buffer) {
+  return Buffer.concat([
+    Buffer.from('7F', 'hex'),
+    setLengthLeft(value, 32),
+    Buffer.from('7F', 'hex'),
+    setLengthLeft(position, 32),
+    Buffer.from('52', 'hex'),
+  ])
+}
+
+/*
+function MLOAD(position: Buffer) {
+  return Buffer.concat([
+    Buffer.from('7F', 'hex'),
+    setLengthLeft(position, 32),
+    Buffer.from('51', 'hex'),
+  ])
+}
+*/
+
 function getAuthCallCode(data: AuthcallData) {
   const ZEROS32 = zeros(32)
   const gasLimitBuffer = setLengthLeft(data.gasLimit ? bigIntToBuffer(data.gasLimit) : ZEROS32, 32)
@@ -125,8 +145,9 @@ function getAuthCallCode(data: AuthcallData) {
 
 // Bytecode to exit call frame and return the topmost stack item
 const RETURNTOP = Buffer.from('60005260206000F3', 'hex')
-// Bytecode to store CALLER in slot 0
-const STORECALLER = Buffer.from('3360005500', 'hex')
+// Bytecode to store CALLER in slot 0 and GAS in slot 1 and the first 32 bytes of the input in slot 2
+// Returns the entire input as output
+const STORECALLER = Buffer.from('5A60015533600055600035600255366000600037366000F3', 'hex')
 
 // This flips the signature: the result is a signature which has the same public key upon key recovery,
 // But the s-value is now > N_DIV_2
@@ -153,12 +174,12 @@ tape('EIP-3074 AUTHCALL', (t) => {
     await vm.stateManager.putContractCode(contractAddress, code)
     const tx = Transaction.fromTxData({
       to: contractAddress,
-      gasLimit: 100000,
+      gasLimit: 1000000,
       gasPrice: 10,
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = BigInt(1000000)
+    account.balance = BigInt(10000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
@@ -175,12 +196,12 @@ tape('EIP-3074 AUTHCALL', (t) => {
     await vm.stateManager.putContractCode(contractAddress, code)
     const tx = Transaction.fromTxData({
       to: contractAddress,
-      gasLimit: 100000,
+      gasLimit: 1000000,
       gasPrice: 10,
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = BigInt(1000000)
+    account.balance = BigInt(10000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
@@ -197,12 +218,12 @@ tape('EIP-3074 AUTHCALL', (t) => {
     await vm.stateManager.putContractCode(contractAddress, code)
     const tx = Transaction.fromTxData({
       to: contractAddress,
-      gasLimit: 100000,
+      gasLimit: 1000000,
       gasPrice: 10,
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = BigInt(1000000)
+    account.balance = BigInt(10000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
@@ -223,12 +244,12 @@ tape('EIP-3074 AUTHCALL', (t) => {
     await vm.stateManager.putContractCode(contractAddress, code)
     const tx = Transaction.fromTxData({
       to: contractAddress,
-      gasLimit: 100000,
+      gasLimit: 1000000,
       gasPrice: 10,
     }).sign(callerPrivateKey)
 
     const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = BigInt(1000000)
+    account.balance = BigInt(10000000)
     await vm.stateManager.putAccount(callerAddress, account)
 
     const result = await vm.runTx({ tx, block })
@@ -238,26 +259,29 @@ tape('EIP-3074 AUTHCALL', (t) => {
 })
 
 /*
-  Test cases AUTHCALL
-  AUTH not set
-  AUTH, INVALID AUTH, AUTHCALL
-  AUTH AUTHCALL
-  AUTH AUTH AUTHCALL
+  TODO testcases
   AUTH AUTHCALL AUTHCALL
   Not enough gas
   Gas param set to 0
-  Verify AUTHCALL sets the right CALLER values when executing contract
   Gas costs
   -> cold address
   -> nonzero transfer
   -> create account
-  Check returnvalues / input values
   Check value is deducted from current contract, not the AUTH account
 */
 
+async function setupVM(code: Buffer) {
+  const vm = new VM({ common })
+  await vm.stateManager.putContractCode(contractAddress, code)
+  await vm.stateManager.putContractCode(contractStorageAddress, STORECALLER)
+  const account = await vm.stateManager.getAccount(callerAddress)
+  account.balance = BigInt(10000000)
+  await vm.stateManager.putAccount(callerAddress, account)
+  return vm
+}
+
 tape('EIP-3074 AUTHCALL', (t) => {
   t.test('Should execute AUTH correctly', async (st) => {
-    const vm = new VM({ common })
     const message = Buffer.from('01', 'hex')
     const signature = signMessage(message, contractAddress, privateKey)
     const code = Buffer.concat([
@@ -267,24 +291,163 @@ tape('EIP-3074 AUTHCALL', (t) => {
       }),
       RETURNTOP,
     ])
+    const vm = await setupVM(code)
 
-    await vm.stateManager.putContractCode(contractAddress, code)
-    await vm.stateManager.putContractCode(contractStorageAddress, STORECALLER)
     const tx = Transaction.fromTxData({
       to: contractAddress,
-      gasLimit: 100000,
+      gasLimit: 1000000,
       gasPrice: 10,
     }).sign(callerPrivateKey)
 
-    const account = await vm.stateManager.getAccount(callerAddress)
-    account.balance = BigInt(1000000)
-    await vm.stateManager.putAccount(callerAddress, account)
-
     const result = await vm.runTx({ tx, block })
+
     const buf = result.execResult.returnValue.slice(31)
     st.ok(buf.equals(Buffer.from('01', 'hex')), 'authcall success')
 
     const storage = await vm.stateManager.getContractStorage(contractStorageAddress, zeros(32))
     st.ok(storage.equals(address.buf), 'caller set correctly')
+  })
+
+  t.test('Should throw if AUTH not set', async (st) => {
+    const code = Buffer.concat([
+      getAuthCallCode({
+        address: contractStorageAddress,
+      }),
+      RETURNTOP,
+    ])
+    const vm = await setupVM(code)
+
+    const tx = Transaction.fromTxData({
+      to: contractAddress,
+      gasLimit: 1000000,
+      gasPrice: 10,
+    }).sign(callerPrivateKey)
+
+    const result = await vm.runTx({ tx, block })
+    st.ok(
+      result.execResult.exceptionError?.error === ERROR.AUTHCALL_UNSET,
+      'threw with right error'
+    )
+    st.ok(result.amountSpent === tx.gasPrice * tx.gasLimit, 'spent all gas')
+  })
+
+  t.test('Should unset AUTH in case of invalid signature', async (st) => {
+    const message = Buffer.from('01', 'hex')
+    const signature = signMessage(message, contractAddress, privateKey)
+    const signature2 = {
+      v: signature.v,
+      r: signature.s,
+      s: signature.s,
+    }
+    const code = Buffer.concat([
+      getAuthCode(message, signature),
+      getAuthCallCode({
+        address: contractStorageAddress,
+      }),
+      getAuthCode(message, signature2),
+      getAuthCallCode({
+        address: contractStorageAddress,
+      }),
+      RETURNTOP,
+    ])
+    const vm = await setupVM(code)
+
+    const tx = Transaction.fromTxData({
+      to: contractAddress,
+      gasLimit: 1000000,
+      gasPrice: 10,
+    }).sign(callerPrivateKey)
+
+    const result = await vm.runTx({ tx, block })
+    st.ok(
+      result.execResult.exceptionError?.error === ERROR.AUTHCALL_UNSET,
+      'threw with right error'
+    )
+    st.ok(result.amountSpent === tx.gasPrice * tx.gasLimit, 'spent all gas')
+  })
+
+  t.test('Should throw if not enough gas is available', async (st) => {
+    const message = Buffer.from('01', 'hex')
+    const signature = signMessage(message, contractAddress, privateKey)
+    const code = Buffer.concat([
+      getAuthCode(message, signature),
+      getAuthCallCode({
+        address: contractStorageAddress,
+        gasLimit: 10000000n,
+      }),
+      RETURNTOP,
+    ])
+    const vm = await setupVM(code)
+
+    const tx = Transaction.fromTxData({
+      to: contractAddress,
+      gasLimit: 1000000,
+      gasPrice: 10,
+    }).sign(callerPrivateKey)
+
+    const result = await vm.runTx({ tx, block })
+    st.ok(result.amountSpent === tx.gasLimit * tx.gasPrice, 'spent all gas')
+    st.ok(result.execResult.exceptionError?.error === ERROR.OUT_OF_GAS, 'correct error type')
+  })
+
+  t.test('Should forward the right amount of gas', async (st) => {
+    const message = Buffer.from('01', 'hex')
+    const signature = signMessage(message, contractAddress, privateKey)
+    const code = Buffer.concat([
+      getAuthCode(message, signature),
+      getAuthCallCode({
+        address: contractStorageAddress,
+        gasLimit: 700000n,
+      }),
+      RETURNTOP,
+    ])
+    const vm = await setupVM(code)
+
+    const tx = Transaction.fromTxData({
+      to: contractAddress,
+      gasLimit: 1000000,
+      gasPrice: 10,
+    }).sign(callerPrivateKey)
+
+    await vm.runTx({ tx, block })
+    const gas = await vm.stateManager.getContractStorage(
+      contractStorageAddress,
+      Buffer.from('00'.repeat(31) + '01', 'hex')
+    )
+    const gasBigInt = bufferToBigInt(gas)
+    st.ok(gasBigInt === BigInt(700000 - 2))
+  })
+
+  t.test('Should forward the right amount of gas', async (st) => {
+    const message = Buffer.from('01', 'hex')
+    const signature = signMessage(message, contractAddress, privateKey)
+    const input = Buffer.from('aa'.repeat(32), 'hex')
+    const code = Buffer.concat([
+      getAuthCode(message, signature),
+      MSTORE(Buffer.from('20', 'hex'), input),
+      getAuthCallCode({
+        address: contractStorageAddress,
+        argsOffset: 32n,
+        argsLength: 32n,
+        retOffset: 64n,
+        retLength: 64n,
+      }),
+      Buffer.from('60206040F3', 'hex'),
+    ])
+    const vm = await setupVM(code)
+
+    const tx = Transaction.fromTxData({
+      to: contractAddress,
+      gasLimit: 1000000,
+      gasPrice: 10,
+    }).sign(callerPrivateKey)
+
+    const result = await vm.runTx({ tx, block })
+    const callInput = await vm.stateManager.getContractStorage(
+      contractStorageAddress,
+      Buffer.from('00'.repeat(31) + '02', 'hex')
+    )
+    st.ok(callInput.equals(input), 'authcall input ok')
+    st.ok(result.execResult.returnValue.equals(input), 'authcall output ok')
   })
 })
