@@ -1,95 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647506974537,
+  "lastUpdate": 1647509032673,
   "repoUrl": "https://github.com/ethereumjs/ethereumjs-monorepo",
   "entries": {
     "Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jochembrouwer96@gmail.com",
-            "name": "Jochem Brouwer",
-            "username": "jochem-brouwer"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "1a49ee1ed50edaef87098c015dd67444d565cdbd",
-          "message": "tx/tests: add hardforks (#1702)\n\nCo-authored-by: Ryan Ghods <ryan@ryanio.com>",
-          "timestamp": "2022-02-08T14:38:11-08:00",
-          "tree_id": "d053793f3a7fcb7648f9bcdf263a627e3dc11441",
-          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/1a49ee1ed50edaef87098c015dd67444d565cdbd"
-        },
-        "date": 1644360620266,
-        "tool": "benchmarkjs",
-        "benches": [
-          {
-            "name": "1k-3-32-ran",
-            "value": 14230,
-            "range": "±14.94%",
-            "unit": "ops/sec",
-            "extra": "69 samples"
-          },
-          {
-            "name": "1k-5-32-ran",
-            "value": 13819,
-            "range": "±13.98%",
-            "unit": "ops/sec",
-            "extra": "71 samples"
-          },
-          {
-            "name": "1k-9-32-ran",
-            "value": 16515,
-            "range": "±1.46%",
-            "unit": "ops/sec",
-            "extra": "75 samples"
-          },
-          {
-            "name": "1k-1k-32-ran",
-            "value": 10926,
-            "range": "±18.05%",
-            "unit": "ops/sec",
-            "extra": "52 samples"
-          },
-          {
-            "name": "1k-1k-32-mir",
-            "value": 5271,
-            "range": "±11.46%",
-            "unit": "ops/sec",
-            "extra": "49 samples"
-          },
-          {
-            "name": "Checkpointing: 100 iterations",
-            "value": 898,
-            "range": "±6.93%",
-            "unit": "ops/sec",
-            "extra": "71 samples"
-          },
-          {
-            "name": "Checkpointing: 500 iterations",
-            "value": 181,
-            "range": "±11.14%",
-            "unit": "ops/sec",
-            "extra": "65 samples"
-          },
-          {
-            "name": "Checkpointing: 1000 iterations",
-            "value": 12.72,
-            "range": "±194.77%",
-            "unit": "ops/sec",
-            "extra": "10 samples"
-          },
-          {
-            "name": "Checkpointing: 5000 iterations",
-            "value": 13.29,
-            "range": "±33.18%",
-            "unit": "ops/sec",
-            "extra": "31 samples"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2610,6 +2523,93 @@ window.BENCHMARK_DATA = {
             "range": "±30.09%",
             "unit": "ops/sec",
             "extra": "31 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "ryan@ryanio.com",
+            "name": "Ryan Ghods",
+            "username": "ryanio"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "55178f44c26182e1abdb35409ec6200f8483ec6a",
+          "message": "client: small fixes (txpool result not iterable, rpc validation for exchangeTransitionConfiguration) (#1793)\n\n* engine: add validation for exchangeTransitionConfiguration\r\n\r\n* create separate type for test utils type StartRPCOpts\r\n\r\n* TxPool: fix `(intermediate value) is not iterable` error on `await getPooledTransactions`",
+          "timestamp": "2022-03-17T10:18:52+01:00",
+          "tree_id": "2300a405a281dead58ef02b448568977a47657c0",
+          "url": "https://github.com/ethereumjs/ethereumjs-monorepo/commit/55178f44c26182e1abdb35409ec6200f8483ec6a"
+        },
+        "date": 1647509032132,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "1k-3-32-ran",
+            "value": 15333,
+            "range": "±15.55%",
+            "unit": "ops/sec",
+            "extra": "65 samples"
+          },
+          {
+            "name": "1k-5-32-ran",
+            "value": 16915,
+            "range": "±1.29%",
+            "unit": "ops/sec",
+            "extra": "76 samples"
+          },
+          {
+            "name": "1k-9-32-ran",
+            "value": 15717,
+            "range": "±1.91%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
+          },
+          {
+            "name": "1k-1k-32-ran",
+            "value": 8184,
+            "range": "±30.20%",
+            "unit": "ops/sec",
+            "extra": "39 samples"
+          },
+          {
+            "name": "1k-1k-32-mir",
+            "value": 18136,
+            "range": "±2.57%",
+            "unit": "ops/sec",
+            "extra": "50 samples"
+          },
+          {
+            "name": "Checkpointing: 100 iterations",
+            "value": 881,
+            "range": "±6.01%",
+            "unit": "ops/sec",
+            "extra": "67 samples"
+          },
+          {
+            "name": "Checkpointing: 500 iterations",
+            "value": 183,
+            "range": "±10.89%",
+            "unit": "ops/sec",
+            "extra": "63 samples"
+          },
+          {
+            "name": "Checkpointing: 1000 iterations",
+            "value": 28.18,
+            "range": "±137.18%",
+            "unit": "ops/sec",
+            "extra": "20 samples"
+          },
+          {
+            "name": "Checkpointing: 5000 iterations",
+            "value": 16.94,
+            "range": "±25.30%",
+            "unit": "ops/sec",
+            "extra": "33 samples"
           }
         ]
       }
