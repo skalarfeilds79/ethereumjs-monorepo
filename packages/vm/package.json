@@ -78,7 +78,7 @@
     "karma-typescript": "^5.5.3",
     "level": "^6.0.0",
     "level-mem": "^5.0.1",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "node-dir": "^0.1.17",
     "nyc": "^15.1.0",
     "prettier": "^2.0.5",
